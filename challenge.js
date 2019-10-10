@@ -1,35 +1,44 @@
 document.addEventListener("DOMContentLoaded", function() {
   console.log("The DOM has loaded");
 
+
 myTimer();
 
 });
 
-let count = 0
-let counter_hold = 0
 
-function myTimer(count) {
-	let isPaused = false
+
+function myTimer() {
+	let count = 0
+	let counter_hold = 0
 	let counter_disp = document.querySelector('#counter')
-	let pause = document.querySelector('#pause')
-
+	let pause_button = document.querySelector('#pause')
+	let resume_button = document.querySelector('#resume')
+	let isPaused = false
 	let main_timer = setInterval(function(){
 			count++
 			counter_disp.innerHTML = count
 	}, 1000)
 
 
-
-	pause.addEventListener("click", function() {
-		if (isPaused == false) {
-			isPaused = true
+	pause_button.addEventListener("click", function() {
+		if (pause_button.innerText == "pause") {
 			counter_hold = count
 			clearInterval(main_timer)
-			isPaused = false
-			myTimer(counter_hold)
+			pause_button.innerText = "resume"
+			pause_button.attr("id", "resume")
 		}
-
 	})
-}
 
+
+	resume_button.addEventListener("click", function() {
+		if (resume_button.innerText == "resume") {
+			counter_hold = count
+			clearInterval(main_timer)
+			pause_button.innerText = "pause"
+			pause_button.attr("id", "pause")
+		}
+	})
+
+}
 
