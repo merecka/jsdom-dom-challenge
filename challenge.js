@@ -26,17 +26,20 @@ function myTimer(x) {
 	}, 1000)
 }
 
+
 // Pause button to pause the counter
 pause_button.addEventListener("click", function() {
 	if (pause_button.innerText == "pause") {
 		plus_button.disabled = true
 		minus_button.disabled = true
+		heart_button.disabled = true
 		counter_hold = count
 		clearInterval(main_timer)
 		pause_button.innerText = "resume"
 	} else {	
 		plus_button.disabled = false
 		minus_button.disabled = false
+		heart_button.disabled = false
 		pause_button.innerText = "pause"
         myTimer(counter_hold)
 	}
@@ -63,8 +66,14 @@ minus_button.addEventListener("click", function() {
 
 // Click the heart (aka: "like") button
 heart_button.addEventListener("click", function() {
-	heart_button.onclick = clicks++
+	let clicks = 0
+	clicks++
+	// heart_button.onclick = clicks++
 	let li = document.createElement('li')
-	li.innerHTML = 
-	like_list.appendChild()
+	if (clicks > 1) {
+		li.innerHTML = `${count} has been liked ${clicks} times`
+	} else {
+		li.innerHTML = `${count} has been liked ${clicks} time`
+	}
+	like_list.appendChild(li)
 })
