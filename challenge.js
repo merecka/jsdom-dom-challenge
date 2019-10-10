@@ -35,8 +35,8 @@ function myTimer() {
 		if (resume_button.innerText == "resume") {
 			counter_hold = count
 			clearInterval(main_timer)
-			pause_button.innerText = "pause"
-			pause_button.attr("id", "pause")
+			resume_button.innerText = "pause"
+			resume_button.attr("id", "pause")
 		}
 	})
 
