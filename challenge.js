@@ -7,6 +7,9 @@ let plus_button = document.querySelector('#plus')
 let minus_button = document.querySelector('#minus')
 let heart_button = document.querySelector('#heart')
 let like_list = document.querySelector(".likes")
+let numbers_liked = {}
+let comment_form = document.querySelector('#comment-form')
+let comment_field = document.querySelector('#comment-input')
 
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -66,14 +69,25 @@ minus_button.addEventListener("click", function() {
 
 // Click the heart (aka: "like") button
 heart_button.addEventListener("click", function() {
-	let clicks = 0
-	clicks++
-	// heart_button.onclick = clicks++
-	let li = document.createElement('li')
-	if (clicks > 1) {
-		li.innerHTML = `${count} has been liked ${clicks} times`
+	if (numbers_liked[count]) {
+		numbers_liked[count] += 1
+		let li = document.getElementById(count)
+		li.innerHTML = `${count} has been liked ${numbers_liked[count]} times`
+		like_list.appendChild(li)
 	} else {
-		li.innerHTML = `${count} has been liked ${clicks} time`
+		numbers_liked[count] = 1
+		let li = document.createElement('li')
+		li.setAttribute("id", `${count}`)
+		li.innerHTML = `${count} has been liked ${numbers_liked[count]} time`
+		like_list.appendChild(li)
 	}
-	like_list.appendChild(li)
+
+// Add comments via form
+comment_form.addEventListener("submit", function(e){
+	const new_comment = document.createElement('p') //creates a new paragraph for each comment
+	new_comment.innerText = comment_field.value // sets the individual comment string equal to what is written in the comment field
+	e.currentTarget.reset() // clears the form after submitting it
+})
+	
+
 })
